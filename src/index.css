@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+/* =========================================
+   QUIZIZZ STYLE THEME
+   FOR react-quiz-component
+========================================= */
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #5b3df5 0%, #6d5dfc 50%, #7c4dff 100%);
+
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.react-quiz-container {
+  width: 100%;
+  max-width: 420px;
+
+  margin: 30px auto;
+
+  background: white;
+
+  border-radius: 32px;
+
+  overflow: hidden;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+
+  position: relative;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.react-quiz-container h2 {
+  font-size: 2rem;
+
+  font-weight: 900;
+
+  color: #1e293b;
+
+  text-align: center;
+
+  padding-inline: 24px;
+
+  margin-top: 40px;
+
+  margin-bottom: 10px;
+}
+
+.react-quiz-container > div > div:nth-child(2) {
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+.quiz-synopsis {
+  text-align: center;
+
+  color: #64748b;
+
+  padding-inline: 30px;
+
+  line-height: 1.7;
+
+  font-size: 0.95rem;
+
+  margin-bottom: 30px;
+}
+
+/* =========================================
+   START BUTTON
+========================================= */
+
+.startQuizWrapper {
+  padding: 24px;
+}
+
+.startQuizBtn {
+  width: 100%;
+
+  border: none;
+  border-radius: 20px;
+
+  padding: 18px;
+
+  background: linear-gradient(to right, #5b3df5, #6d5dfc);
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  box-shadow: 0 10px 25px rgba(91, 61, 245, 0.4);
+}
+
+.startQuizBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   QUESTION WRAPPER
+========================================= */
+
+.questionWrapper {
+  padding: 24px;
+}
+
+.questionWrapperBody {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =========================================
+   COUNTER
+========================================= */
+
+.questionWrapperBody > div:first-child {
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  color: #64748b;
+}
+
+/* =========================================
+   QUESTION
+========================================= */
+
+.questionWrapperBody h3 {
+  font-size: 1.7rem;
+
+  line-height: 1.5;
+
+  font-weight: 900;
+
+  text-align: center;
+
+  color: #0f172a;
+
+  margin: 0;
+}
+
+/* =========================================
+   TAGS
+========================================= */
+
+.tag-container {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.selection-tag,
+.number-of-selection {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+}
+
+.selection-tag {
+  background: #e0e7ff;
+
+  color: #4338ca;
+}
+
+.number-of-selection {
+  background: #cffafe;
+
+  color: #155e75;
+}
+
+/* =========================================
+   ANSWERS
+========================================= */
+
+.answerBtn {
+  width: 100%;
+
+  min-height: 90px;
+
+  border: none;
+
+  border-radius: 24px;
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  margin-bottom: 16px;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+
+  padding: 20px;
+
+  text-align: center;
+}
+
+.answerBtn:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================================
+   QUIZIZZ COLORS
+========================================= */
+
+.answerBtn:nth-of-type(1) {
+  background: #3b82f6;
+}
+
+.answerBtn:nth-of-type(2) {
+  background: #ef4444;
+}
+
+.answerBtn:nth-of-type(3) {
+  background: #f59e0b;
+}
+
+.answerBtn:nth-of-type(4) {
+  background: #10b981;
+}
+
+/* =========================================
+   CORRECT / INCORRECT
+========================================= */
+
+.answerBtn.correct {
+  outline: 5px solid white;
+
+  transform: scale(1.02);
+}
+
+.answerBtn.incorrect {
+  opacity: 0.35;
+}
+
+/* =========================================
+   NEXT BUTTON
+========================================= */
+
+.nextQuestionBtn {
+  width: 100%;
+
+  border: none;
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  margin-top: 12px;
+
+  background: linear-gradient(to right, #5b3df5, #6d5dfc);
+
+  color: black;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.nextQuestionBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   RESULTS
+========================================= */
+
+.card-body {
+  padding: 24px;
+}
+
+.result-answer-wrapper {
+  background: #f8fafc;
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  border: 1px solid #e2e8f0;
+}
+
+.result-answer-wrapper h3 {
+  font-size: 1.1rem;
+
+  line-height: 1.5;
+
+  margin-bottom: 18px;
+
+  color: #0f172a;
+}
+
+/* =========================================
+   FILTER
+========================================= */
+
+.filter-dropdown-select {
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 16px;
+
+  padding: 12px 16px;
+
+  cursor: pointer;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  .react-quiz-container {
+    max-width: 100%;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    border-radius: 0;
+  }
+
+  .questionWrapperBody h3 {
+    font-size: 1.3rem;
+  }
+
+  .answerBtn {
+    min-height: 80px;
+
+    font-size: 0.9rem;
+  }
+
+  .react-quiz-container h2 {
+    font-size: 1.6rem;
+  }
+}
