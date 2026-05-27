@@ -21,18 +21,34 @@ export async function getLeaderboard() {
 }
 
 export async function saveScore(entry) {
-  try {
-    await fetch("/api/save-score", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(entry),
-    });
 
-    return await getLeaderboard();
+  try {
+
+    const response = await fetch(
+      "/api/save-score",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(entry),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed request");
+    }
+
+    const data = await response.json();
+
+    return data.leaderboard || [];
+
   } catch (err) {
+
     console.error(err);
+
     return [];
   }
 }

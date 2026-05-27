@@ -1,16 +1,55 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
+
 import { getLeaderboard, saveScore } from "../utils/scores";
 
 export function useLeaderboard() {
-  // Load once when the hook is first used (app start or results screen mount)
-  const [leaderboard, setLeaderboard] = useState(() => getLeaderboard());
+  const [leaderboard, setLeaderboard] = useState([]);
 
-  const save = useCallback((entry) => {
-    const updated = saveScore(entry);
-    setLeaderboard(updated);
-    return updated;
+  const [loading, setLoading] = useState(true);
+
+  // =========================
+  // LOAD LEADERBOARD
+  // =========================
+
+  useEffect(() => {
+    const loadLeaderboard = async () => {
+      try {
+        const data = await getLeaderboard();
+
+        setLeaderboard(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error(error);
+
+        setLeaderboard([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadLeaderboard();
   }, []);
 
+  // =========================
+  // SAVE SCORE
+  // =========================
 
-  return { leaderboard, save };
+  const save = useCallback(async (entry) => {
+    try {
+      const updated = await saveScore(entry);
+
+      setLeaderboard(Array.isArray(updated) ? updated : []);
+
+      return updated;
+    } catch (error) {
+      console.error(error);
+
+      return [];
+    }
+  }, []);
+
+  return {
+    leaderboard,
+    loading,
+    save,
+  };
 }

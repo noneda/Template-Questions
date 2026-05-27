@@ -12,12 +12,16 @@ export default function App() {
   const [quizResult, setQuizResult] = useState(null);
 
   // Single source of truth for leaderboard — loaded once at app start
-  const { leaderboard, save,  } = useLeaderboard();
+  const { leaderboard, save, loading } = useLeaderboard();
 
   const handleQuizComplete = (result) => {
     setQuizResult(result);
     setScreen("results");
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handlePlayAgain = () => {
     setPlayerName("");
