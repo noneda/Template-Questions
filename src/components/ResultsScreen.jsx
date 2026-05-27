@@ -13,7 +13,6 @@ export function ResultsScreen({
   leaderboard,
   onSave,
   onPlayAgain,
-  onReset,
 }) {
   const savedRef = useRef(false);
 
@@ -94,16 +93,6 @@ export function ResultsScreen({
             className="flex-1 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors"
           >
             Play again
-          </button>
-          <button
-            onClick={() => {
-              if (window.confirm("This will erase all scores. Are you sure?")) {
-                onReset();
-              }
-            }}
-            className="px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-500 text-sm transition-colors"
-          >
-            Reset scores
           </button>
         </div>
       </div>

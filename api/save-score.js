@@ -29,7 +29,7 @@ export default async function handler(request, response) {
     await fetch(`${KV_URL}/set/players`, {
       method: "POST",
       headers: { Authorization: `Bearer ${KV_TOKEN}` },
-      body: JSON.stringify(JSON.stringify(players)),
+      body: JSON.stringify(players),
     });
   };
 
@@ -46,22 +46,27 @@ export default async function handler(request, response) {
   // POST — Save new score
   if (request.method === "POST") {
     try {
-      const { name, score } = request.body;
-
+      const { name, score, percentage, correct, total, date } = req.body;
+      
       if (!name) {
         return response.status(400).json({ error: "Missing player name" });
       }
 
+      const safeName = name.trim().slice(0, 20).replace(/[<>]/g, "");
+
       const players = await kvGet();
 
       const newEntry = {
-        name,
+        safeName,
         score,
         date: new Date().toISOString(),
       };
 
       players.push(newEntry);
-      await kvSet(players);
+      players.sort((a, b) => b.score - a.score);
+
+      const trimmed = players.slice(0, 100);
+      await kvSet(trimmed);
 
       return response.status(200).json({ success: true, player: newEntry });
     } catch (error) {

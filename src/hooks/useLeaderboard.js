@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { getLeaderboard, saveScore, clearLeaderboard } from "../utils/scores";
+import { getLeaderboard, saveScore } from "../utils/scores";
 
 export function useLeaderboard() {
   // Load once when the hook is first used (app start or results screen mount)
@@ -11,10 +11,6 @@ export function useLeaderboard() {
     return updated;
   }, []);
 
-  const reset = useCallback(() => {
-    clearLeaderboard();
-    setLeaderboard([]);
-  }, []);
 
-  return { leaderboard, save, reset };
+  return { leaderboard, save };
 }

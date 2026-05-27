@@ -1,25 +1,47 @@
-const STORAGE_KEY = "quiz_leaderboard";
-
-export function getLeaderboard() {
+export async function getLeaderboard() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
+    const response = await fetch("/api/save-score");
+
+    if (!response.ok) {
+      throw new Error("Failed request");
+    }
+
+    const text = await response.text();
+
+    try {
+      return JSON.parse(text);
+    } catch {
+      console.error("Invalid JSON:", text);
+      return [];
+    }
+  } catch (err) {
+    console.error(err);
     return [];
   }
 }
 
-export function saveScore(entry) {
-  const current = getLeaderboard();
-  const updated = [...current, entry].sort((a, b) => b.score - a.score);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  return updated;
-}
+export async function saveScore(entry) {
+  try {
+    await fetch("/api/save-score", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry),
+    });
 
-export function clearLeaderboard() {
-  localStorage.removeItem(STORAGE_KEY);
+    return await getLeaderboard();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
 }
 
 export function getPlayerRank(leaderboard, name, score) {
+  if (!Array.isArray(leaderboard)) {
+    return -1;
+  }
+
   return leaderboard.findIndex((e) => e.name === name && e.score === score) + 1;
 }
 

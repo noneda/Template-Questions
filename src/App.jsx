@@ -12,7 +12,7 @@ export default function App() {
   const [quizResult, setQuizResult] = useState(null);
 
   // Single source of truth for leaderboard — loaded once at app start
-  const { leaderboard, save, reset } = useLeaderboard();
+  const { leaderboard, save,  } = useLeaderboard();
 
   const handleQuizComplete = (result) => {
     setQuizResult(result);
@@ -23,11 +23,6 @@ export default function App() {
     setPlayerName("");
     setQuizResult(null);
     setScreen("start");
-  };
-
-  const handleReset = () => {
-    reset();
-    handlePlayAgain();
   };
 
   if (screen === "start") {
@@ -53,7 +48,6 @@ export default function App() {
         leaderboard={leaderboard}
         onSave={save}
         onPlayAgain={handlePlayAgain}
-        onReset={handleReset}
       />
     );
   }
