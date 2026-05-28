@@ -21,21 +21,16 @@ export async function getLeaderboard() {
 }
 
 export async function saveScore(entry) {
-
   try {
+    const response = await fetch("/api/save-score", {
+      method: "POST",
 
-    const response = await fetch(
-      "/api/save-score",
-      {
-        method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(entry),
-      }
-    );
+      body: JSON.stringify(entry),
+    });
 
     if (!response.ok) {
       throw new Error("Failed request");
@@ -44,9 +39,7 @@ export async function saveScore(entry) {
     const data = await response.json();
 
     return data.leaderboard || [];
-
   } catch (err) {
-
     console.error(err);
 
     return [];
@@ -81,14 +74,17 @@ export function getScoreMeta(percentage) {
 export function buildEntry(playerName, result) {
   const correctAnswers = result.numberOfCorrectAnswers;
   const totalQuestions = result.numberOfQuestions;
+
   const percentage =
     totalQuestions > 0
       ? Math.round((correctAnswers / totalQuestions) * 100)
       : 0;
 
+  const score = percentage;
+
   return {
     name: playerName,
-    score: result.totalPoints,
+    score,
     correct: correctAnswers,
     total: totalQuestions,
     percentage,
